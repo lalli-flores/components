@@ -22,9 +22,8 @@ import RoomsAdapter from './RoomsAdapter';
 export default class RoomsJSONAdapter extends RoomsAdapter {
   constructor(datasource) {
     super(datasource);
-    this.getRoom = this.getRoom.bind(this);
-    this.getPreviousRoomActivities = this.getPreviousRoomActivities.bind(this);
-    this.getRoomActivities = this.getRoomActivities.bind(this);
+
+    this.dataChunkSize = 4;
   }
 
   /**
@@ -47,13 +46,13 @@ export default class RoomsJSONAdapter extends RoomsAdapter {
   }
 
   /**
-   * Returns an observable that emits an array of previous activity IDs of the given roomID.
+   * Returns an observable that emits an array of current and future activities of the given roomID.
    *
-   * @param {string} ID  ID of the room to get.
-   * @returns {Observable.<Array.<string>>}
-   * @memberof RoomsAdapter
+   * @param {string} ID  ID of the room for which to get activities.
+   * @returns {Observable.<Array.<string|ActivityDate>>}
+   * @memberof RoomsJSONAdapter
    */
-  getPreviousRoomActivities(ID) {
+  getRoomActivities(ID) {
     return Observable.create((observer) => {
       const data = !this.datasource[`${ID}-activities`] ? [] : this.datasource[`${ID}-activities`];
 
@@ -64,19 +63,47 @@ export default class RoomsJSONAdapter extends RoomsAdapter {
   }
 
   /**
-   * Returns an observable that emits an array of current activity IDs of the given roomID.
+   * Returns a promise to an array of the next chunk of previous activity data
+   * of the given roomID. If `hasMoreActivities` returns false, the promise
+   * will return [].
    *
-   * @param {string} ID  ID of the room to get.
-   * @returns {Observable.<Array.<string>>}
-   * @memberof RoomsAdapter
+   * The next chunk is based on the adapter's `dataChunkSize`.
+   *
+   * @param {string} ID  ID of the room for which to get activities.
+   * @returns {Promise.<Array.<string|ActivityDate>>}
+   * @memberof RoomsJSONAdapter
    */
-  getRoomActivities(ID) {
-    return Observable.create((observer) => {
-      const data = !this.datasource[`${ID}-activities`] ? [] : this.datasource[`${ID}-activities`];
+  getPreviousRoomActivities(ID) {
+    let data = [];
 
-      observer.next(data);
+    if (`${ID}-previous-activities` in this.datasource) {
+      const startIndex = this.lastDataIndex[ID] ? this.lastDataIndex[ID] : 0;
+      const endIndex = startIndex + this.dataChunkSize;
 
-      observer.complete();
-    });
+      data = this.datasource[`${ID}-previous-activities`].slice(startIndex, endIndex);
+      this.lastDataIndex[ID] = endIndex;
+    }
+
+    return Promise.resolve(data);
+  }
+
+  /**
+   * Returns `true` if there are more activities to load from the room of the given ID.
+   * Otherwise, it returns `false`.
+   *
+   * @param {string} ID ID of the room for which to verify activities.
+   * @returns {boolean}
+   * @memberof RoomsJSONAdapter
+   */
+  hasMoreActivities(ID) {
+    // If no data yet, initialize data index
+    this.lastDataIndex[ID] = this.lastDataIndex[ID] ? this.lastDataIndex[ID] : 0;
+    let result = false;
+
+    if (`${ID}-previous-activities` in this.datasource) {
+      result = this.lastDataIndex[ID] < this.datasource[`${ID}-previous-activities`].length;
+    }
+
+    return result;
   }
 }

@@ -43,37 +43,6 @@ describe('Rooms JSON Adapter Interface', () => {
     );
   });
 
-  test('getPreviousRoomActivities() returns an observable', () => {
-    expect(rxjs.isObservable(roomsJSONAdapter.getPreviousRoomActivities())).toBeTruthy();
-  });
-
-  test('getPreviousRoomActivities() returns an array of previous activity IDs', (done) => {
-    roomsJSONAdapter.getPreviousRoomActivities(roomID).subscribe((data) => {
-      expect(data).toEqual(rooms[`${roomID}-activities`]);
-      done();
-    });
-  });
-
-  test('getPreviousRoomActivities() returns an observable to an empty array for a given wrong room ID', (done) => {
-    const wrongRoomActivitiesID = 'wrongRoomActivitiesID';
-
-    roomsJSONAdapter.getPreviousRoomActivities(wrongRoomActivitiesID).subscribe((data) => {
-      expect(data).toEqual([]);
-      done();
-    });
-  });
-
-  test('getPreviousRoomActivities() completes the observable', (done) => {
-    roomsJSONAdapter.getPreviousRoomActivities(roomID).subscribe(
-      () => {},
-      () => {},
-      () => {
-        expect(true).toBeTruthy();
-        done();
-      }
-    );
-  });
-
   test('getRoomActivities() returns an observable', () => {
     expect(rxjs.isObservable(roomsJSONAdapter.getRoomActivities())).toBeTruthy();
   });
@@ -112,6 +81,32 @@ describe('Rooms JSON Adapter Interface', () => {
         done();
       }
     );
+  });
+
+  test('getPreviousRoomActivities() returns an array of previous activity IDs', async () => {
+    const data = await roomsJSONAdapter.getPreviousRoomActivities(roomID);
+
+    expect(data).toEqual(rooms[`${roomID}-previous-activities`]);
+  });
+
+  test('getPreviousRoomActivities() returns an empty array for a given wrong room ID', async () => {
+    const wrongRoomActivitiesID = 'wrongRoomActivitiesID';
+    const data = await roomsJSONAdapter.getPreviousRoomActivities(wrongRoomActivitiesID);
+
+    expect(data).toEqual([]);
+  });
+
+  test('hasMoreActivities() returns true if room has more activities to load', () => {
+    roomsJSONAdapter.lastDataIndex[roomID] = 2; // Arbitrary small number
+
+    expect(roomsJSONAdapter.hasMoreActivities(roomID)).toBeTruthy();
+  });
+
+  test('hasMoreActivities() returns false if the room has no more activities to load', () => {
+    // Larger than the total
+    roomsJSONAdapter.lastDataIndex[roomID] = rooms[`${roomID}-previous-activities`].length + 1;
+
+    expect(roomsJSONAdapter.hasMoreActivities(roomID)).toBeFalsy();
   });
 
   afterEach(() => {
