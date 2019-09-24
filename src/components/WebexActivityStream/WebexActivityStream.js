@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {ListSeparator} from '@momentum-ui/react';
 import {format, isToday, isSameWeek, isYesterday} from 'date-fns';
@@ -180,7 +180,9 @@ TimeRuler.propTypes = {
 
 export default function WebexActivityStream({roomID}) {
   const {title, roomType} = useRoom(roomID);
-  const activitiesData = useActivityStream(roomID);
+  const activityStreamRef = useRef(null);
+  const [activitiesData, showLoader] = useActivityStream(roomID, activityStreamRef);
+
   const personName = roomType === RoomType.DIRECT ? title : '';
   const activities = activitiesData.map((activity) => {
     // If the activity is an object with a date property, it is a time ruler
@@ -194,7 +196,8 @@ export default function WebexActivityStream({roomID}) {
   });
 
   return (
-    <div className="activity-stream">
+    <div className="activity-stream" ref={activityStreamRef}>
+      {showLoader ? <div className="activity-stream-loader" /> : null}
       {activities.length ? <Fragment>{activities}</Fragment> : <Greeting personName={personName} />}
     </div>
   );
