@@ -1,4 +1,4 @@
-import React, {Fragment, useRef} from 'react';
+import React, {Fragment, useRef, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {ListSeparator} from '@momentum-ui/react';
 import {format, isToday, isSameWeek, isYesterday} from 'date-fns';
@@ -179,9 +179,15 @@ TimeRuler.propTypes = {
 };
 
 export default function WebexActivityStream({roomID}) {
-  const {title, roomType} = useRoom(roomID);
   const activityStreamRef = useRef(null);
+  const lastActivityRef = useRef(null);
+  const {title, roomType} = useRoom(roomID);
   const [activitiesData, showLoader] = useActivityStream(roomID, activityStreamRef);
+
+  // Scroll to bottom of activity stream on first load
+  useEffect(() => {
+    lastActivityRef.current.scrollIntoView();
+  }, []);
 
   const personName = roomType === RoomType.DIRECT ? title : '';
   const activities = activitiesData.map((activity) => {
@@ -199,6 +205,7 @@ export default function WebexActivityStream({roomID}) {
     <div className="activity-stream" ref={activityStreamRef}>
       {showLoader ? <div className="activity-stream-loader" /> : null}
       {activities.length ? <Fragment>{activities}</Fragment> : <Greeting personName={personName} />}
+      <div className="last-activity" ref={lastActivityRef} />
     </div>
   );
 }

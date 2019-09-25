@@ -4,6 +4,11 @@
   height: 100px;
   overflow-y: auto;
 
+  .last-activity {
+    width: 100%;
+    height: 1px;
+  }
+
   &-loader {
     position: relative;
     width: 10px;
