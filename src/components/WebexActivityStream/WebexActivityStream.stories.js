@@ -33,3 +33,9 @@ stories.add('empty 1:1 stream', () => (
     <WebexActivityStream roomID="empty-direct" />
   </WebexDataProvider>
 ));
+
+stories.add('Loader', () => (
+  <WebexDataProvider adapter={adapter}>
+    <WebexActivityStream roomID="loader" />
+  </WebexDataProvider>
+));

@@ -62,5 +62,181 @@
     "personID": "default",
     "created": "old",
     "displayHeader": true
+  },
+  "hellen-keller-1": {
+    "ID": "hellen-keller-1",
+    "roomID": "roomID",
+    "text": "1 - Oh, what a glory doth the world put on",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-2": {
+    "ID": "hellen-keller-2",
+    "roomID": "roomID",
+    "text": "2 - These peerless, perfect autumn days",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-3": {
+    "ID": "hellen-keller-3",
+    "roomID": "roomID",
+    "text": "3 - There is a beautiful spirit of gladness everywhere,",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-4": {
+    "ID": "hellen-keller-4",
+    "roomID": "roomID",
+    "text": "4 - The wooded waysides are luminous with brightly painted leaves;",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-5": {
+    "ID": "hellen-keller-5",
+    "roomID": "roomID",
+    "text": "5 - The forest-trees with royal grace have donned",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-6": {
+    "ID": "hellen-keller-6",
+    "roomID": "roomID",
+    "text": "6 - Their gorgeous autumn tapestries;",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-7": {
+    "ID": "hellen-keller-7",
+    "roomID": "roomID",
+    "text": "7 - And even the rocks and fences are broidered",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-8": {
+    "ID": "hellen-keller-8",
+    "roomID": "roomID",
+    "text": "8 - With ferns, sumachs and brilliantly tinted ivies.",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-9": {
+    "ID": "hellen-keller-9",
+    "roomID": "roomID",
+    "text": "9 - But so exquisitely blended are the lights and shades,",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-10": {
+    "ID": "hellen-keller-10",
+    "roomID": "roomID",
+    "text": "10 - The golds, scarlets and purples, that no sense is wearied;",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-11": {
+    "ID": "hellen-keller-11",
+    "roomID": "roomID",
+    "text": "11 - For God himself hath painted the landscape.",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-12": {
+    "ID": "hellen-keller-12",
+    "roomID": "roomID",
+    "text": "12 - The hillsides gleam with golden corn;",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-13": {
+    "ID": "hellen-keller-13",
+    "roomID": "roomID",
+    "text": "13 - Apple and peach-trees bend beneath their burdens of golden fruit.",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-14": {
+    "ID": "hellen-keller-14",
+    "roomID": "roomID",
+    "text": "14 - The golden-rods, too, are here, whole armies of them,",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-15": {
+    "ID": "hellen-keller-15",
+    "roomID": "roomID",
+    "text": "15 - With waving plumes, resplendent with gold;",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-16": {
+    "ID": "hellen-keller-16",
+    "roomID": "roomID",
+    "text": "16 - And about the wild grapes, purple and fair and full of sunshine,",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-17": {
+    "ID": "hellen-keller-17",
+    "roomID": "roomID",
+    "text": "17 - The little birds southward going",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-18": {
+    "ID": "hellen-keller-18",
+    "roomID": "roomID",
+    "text": "18 - Linger, like travelers at an Inn,",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-19": {
+    "ID": "hellen-keller-19",
+    "roomID": "roomID",
+    "text": "19 - And sip the perfumed wine.",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-20": {
+    "ID": "hellen-keller-20",
+    "roomID": "roomID",
+    "text": "20 - And far away the mountains against the blue sky stand",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-21": {
+    "ID": "hellen-keller-21",
+    "roomID": "roomID",
+    "text": "21 - Calm and mysterious, like prophets of God,",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
+  },
+  "hellen-keller-22": {
+    "ID": "hellen-keller-22",
+    "roomID": "roomID",
+    "text": "22 - Wrapped in purple mist.",
+    "personID": "hellen-keller",
+    "created": "2019-08-20T21:00:00.007Z",
+    "displayHeader": true
   }
 }

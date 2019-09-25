@@ -22,5 +22,35 @@
     "title": "Time Rulers Room",
     "roomType": "group"
   },
-  "time-rulers-activities": [{"date": "2019-08-20T21:00:07.047Z"}, "default", "no-header", "long", {"date": "2019-08-22T21:00:07.047Z"}, "multi-line"]
+  "time-rulers-activities": [{"date": "2019-08-20T21:00:07.047Z"}, "default", "no-header", "long", {"date": "2019-08-22T21:00:07.047Z"}, "multi-line"],
+  "loader": {
+    "ID": "loader",
+    "title": "Hellen Keller loading example",
+    "roomType": "group"
+  },
+  "loader-activities": [],
+  "loader-previous-activities": [
+    "hellen-keller-1",
+    "hellen-keller-2",
+    "hellen-keller-3",
+    "hellen-keller-4",
+    "hellen-keller-5",
+    "hellen-keller-6",
+    "hellen-keller-7",
+    "hellen-keller-8",
+    "hellen-keller-9",
+    "hellen-keller-10",
+    "hellen-keller-11",
+    "hellen-keller-12",
+    "hellen-keller-13",
+    "hellen-keller-14",
+    "hellen-keller-15",
+    "hellen-keller-16",
+    "hellen-keller-17",
+    "hellen-keller-18",
+    "hellen-keller-19",
+    "hellen-keller-20",
+    "hellen-keller-21",
+    "hellen-keller-22"
+  ]
 }
