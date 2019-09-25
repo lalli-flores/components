@@ -2,6 +2,8 @@ import React from 'react';
 import Enzyme, {shallow, render, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import * as rxjs from 'rxjs';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 import jsonData from '../src/data';
 
