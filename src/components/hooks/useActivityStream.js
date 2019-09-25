@@ -42,11 +42,13 @@ function reducer(activities, action) {
  *
  * @param {string} roomID  ID of the room for which to return data.
  * @param {object} elementRef  reference to the element to attach scroll listener.
+ * @param {object} lastElementRef  reference to the last element within elementRef
  * @returns {Array} Activities state and showLoader state
  */
-export default function useActivityStream(roomID, elementRef) {
+export default function useActivityStream(roomID, elementRef, lastElementRef) {
   const [activities, dispatch] = useReducer(reducer, []);
   const [showLoader, setShowLoader] = useState(false);
+  const [scrollToLastActivity, setScrollToLastActivity] = useState(true);
   const {roomsAdapter} = useContext(AdapterContext);
 
   const loadPreviousActivities = async () => {
@@ -55,17 +57,48 @@ export default function useActivityStream(roomID, elementRef) {
     dispatch({type: PREPEND_ACTIVITIES, payload: previousActivities});
   };
 
-  const handleScroll = async (event) => {
+  const handleScroll = (event) => {
     // Only load more data when user has reached the top
     const isViewportTop = event.target.scrollTop === 0;
 
     if (!showLoader && isViewportTop && roomsAdapter.hasMoreActivities(roomID)) {
       setShowLoader(true);
-      await loadPreviousActivities();
-      setShowLoader(false);
+
+      // Throttle scroll
+      setTimeout(async () => {
+        await loadPreviousActivities();
+        setShowLoader(false);
+      }, 500);
     }
   };
 
+  // Keep requesting previous activities until activity stream is filled
+  useEffect(() => {
+    const activityStreamBoundaries = elementRef.current.getBoundingClientRect();
+    const lastActivityBoundaries = lastElementRef.current.getBoundingClientRect();
+    const hasMoreActivities = roomsAdapter.hasMoreActivities(roomID);
+
+    if (lastActivityBoundaries.bottom < activityStreamBoundaries.bottom) {
+      // If there are more activities, load them
+      if (hasMoreActivities) {
+        loadPreviousActivities();
+        // if there are no more activities to load, scroll to last activity
+      } else {
+        lastElementRef.current.scrollIntoView();
+        setScrollToLastActivity(false);
+      }
+    } else {
+      // Scroll to bottom once after loading enough content
+      // eslint-disable-next-line no-lonely-if
+      if (scrollToLastActivity) {
+        lastElementRef.current.scrollIntoView();
+        setScrollToLastActivity(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activities]);
+
+  // Attach scroll event listener and subscribe to future updates on load
   useEffect(() => {
     // If an element is passed in, bind scroll event
     const element = elementRef.current;
@@ -74,14 +107,15 @@ export default function useActivityStream(roomID, elementRef) {
       element.addEventListener('scroll', handleScroll);
     }
 
-    // Load previous content if there is any
-    loadPreviousActivities();
-
     const subscription = roomsAdapter.getRoomActivities(roomID).subscribe((activityData) => {
       dispatch({type: APPEND_ACTIVITIES, payload: activityData});
     });
 
     return () => {
+      // Reset previous index count since component unmounts
+      // It will run all hooks again
+      roomsAdapter.lastDataIndex[roomID] = 0;
+
       if (element) {
         element.removeEventListener('scroll', handleScroll);
       }
